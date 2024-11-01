@@ -17,9 +17,12 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->alias([
-            'role' => \App\Http\Middleware\CheckRole::class, 
+            'role' => \App\Http\Middleware\CheckRole::class,
         ]);
     })
+    ->withCommands([
+        \App\Console\Commands\MakeService::class,
+    ])
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

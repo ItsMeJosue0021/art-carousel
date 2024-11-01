@@ -7,7 +7,7 @@ const AdminLayout = ({children}) => {
 
     return (
         <div className="flex flex-col bg-gray-100 min-h-screen">
-            <header className="bg-black text-white">
+            <header className="bg-[#01161e] text-white">
                 <div className="flex items-center justify-between container mx-auto  flex-wrap p-5 flex-col md:flex-row">
                     <h1 className='text-2xl'>Art Carousel</h1>
                     <div className="hidden sm:ms-6 sm:flex sm:items-center">
@@ -17,7 +17,7 @@ const AdminLayout = ({children}) => {
                                     <span className="inline-flex rounded-md">
                                         <button
                                             type="button"
-                                            className="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
+                                            className="inline-flex items-center rounded-md border border-transparent bg-transparent px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:text-blue-500 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
                                         >
                                             {user.name}
 
