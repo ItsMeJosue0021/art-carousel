@@ -2,7 +2,12 @@
 
 namespace App\Services;
 
+use App\Models\ArtworkCategory;
+
 class ArtworkCategoryService
 {
-    // Service methods here
+    public function getAllArtworkCategory() {
+        $artworkCategories = ArtworkCategory::all();
+        return $artworkCategories;
+    }
 }

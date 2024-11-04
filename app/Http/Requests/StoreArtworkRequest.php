@@ -27,7 +27,6 @@ class StoreArtworkRequest extends FormRequest
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'artworkCategoryId' => 'required|exists:artwork_categories,id',
-            'productStatusId' => 'required|exists:product_statuses,id',
             'userId' => 'required|exists:users,id',
         ];
     }

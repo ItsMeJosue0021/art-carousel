@@ -18,7 +18,7 @@ class ArtworkService
             'description' => $artwork['description'],
             'price' => $artwork['price'],
             'artwork_category_id' => $artwork['artworkCategoryId'],
-            'product_status_id' => $artwork['productStatusId'],
+            'product_status_id' => 2,
             'user_id' => $artwork['userId'],
         ];
 
