@@ -28,6 +28,7 @@ class StoreArtworkRequest extends FormRequest
             'price' => 'required|numeric|min:0',
             'artworkCategoryId' => 'required|exists:artwork_categories,id',
             'userId' => 'required|exists:users,id',
+            'image' => 'required|image',
         ];
     }
 

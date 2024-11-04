@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignIdFor(ArtworkCategory::class)->constrained();
             $table->foreignIdFor(ProductStatus::class)->constrained();
             $table->foreignIdFor(User::class)->constrained();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

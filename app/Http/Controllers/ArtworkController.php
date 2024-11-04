@@ -27,7 +27,7 @@ class ArtworkController extends Controller
     }
 
     public function storeArtwork(StoreArtworkRequest $request) {
-        $artwork = $this->artworkService->storeArtwork( $request->validated());
+        $artwork = $this->artworkService->storeArtwork( $request->validated(), $request->file('image'));
         return (new ArtworkResource($artwork))
                 ->response()
                 ->header('Content-Type', 'application/json')

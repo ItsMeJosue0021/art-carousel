@@ -22,6 +22,7 @@ class ArtworkResource extends JsonResource
             'artworkCategoryId' => $this->artwork_category_id,
             'productStatusId' => $this->product_status_id,
             'userId' => $this->user_id,
+            'image' => $this->image,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
         ];

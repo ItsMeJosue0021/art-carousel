@@ -16,6 +16,7 @@ class Artwork extends Model
         'artwork_category_id',
         'product_status_id',
         'user_id',
+        'image'
     ];
 
     public function category() {

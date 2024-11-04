@@ -11,7 +11,7 @@ class ArtworkService
         return $artworks;
     }
 
-    public function storeArtwork($artwork) {
+    public function storeArtwork($artwork, $image) {
 
         $data = [
             'name' => $artwork['name'],
@@ -21,6 +21,10 @@ class ArtworkService
             'product_status_id' => 2,
             'user_id' => $artwork['userId'],
         ];
+
+        if ($image) {
+            $data['image'] = $image->store('artworks', 'public');
+        }
 
         $createdArtwork = Artwork::create($data);
         return $createdArtwork;
