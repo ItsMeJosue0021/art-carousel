@@ -1,9 +1,10 @@
 import React from "react";
-import Dropdown from '@/Components/Dropdown';
 import { usePage } from '@inertiajs/react';
 import SideBar from "@/Components/SideBar";
+import Dropdown from '@/Components/Dropdown';
+import { ToastContainer } from 'react-toastify';
 
-const AdminLayout = ({children}) => {
+const UserLayout = ({children}) => {
     const user = usePage().props.auth.user;
 
     return (
@@ -60,10 +61,11 @@ const AdminLayout = ({children}) => {
                         </div>
                     </header>
                     {children}
+                    <ToastContainer/>
                 </div>
             </div>
         </div>
     )
 }
 
-export default AdminLayout;
+export default UserLayout;

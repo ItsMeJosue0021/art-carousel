@@ -7,6 +7,7 @@ import api from "@/api";
 const AddArtworkForm = () => {
     const user = usePage().props.auth.user;
 
+    const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([]);
     const [errors, setErrors] = useState({});
     const [name, setName] = useState('');
@@ -38,6 +39,7 @@ const AddArtworkForm = () => {
     }
 
     const addArtwork = async () => {
+        setLoading(true);
         const artworkData = {
             name: name,
             description: description,
@@ -68,12 +70,14 @@ const AddArtworkForm = () => {
                 console.error('Error posting data:', error);
                 toast.error('Failed to save artwork.');
             }
+        } finally {
+            setLoading(false);
         }
     }
 
 
     return (
-        <div className="p-6 flex items-start gap-5">
+        <div className="text-sm p-6 flex items-start gap-5">
             <div className="w-full flex flex-col gap-5">
                 <div className="flex flex-col space-y-1">
                     <p>Name</p>
@@ -103,9 +107,42 @@ const AddArtworkForm = () => {
                     {errors.artworkCategoryId && <span className="text-xs text-red-500">{errors.artworkCategoryId[0]}</span>}
                 </div>
 
-                <div className="flex">
+                {/* <div className="flex">
                     <button onClick={addArtwork} className="w-full px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded">Save</button>
+                </div> */}
+                <div className="flex">
+                    <button
+                        onClick={addArtwork}
+                        className="w-full px-4 py-2 text-sm text-white bg-blue-800 hover:bg-blue-900 rounded flex items-center justify-center"
+                        disabled={loading} // Disable button when loading
+                    >
+                        {loading ? (
+                            <svg
+                                className="animate-spin h-5 w-5 mr-3 text-white"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                ></circle>
+                                <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.963 7.963 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                ></path>
+                            </svg>
+                        ) : (
+                            'Save'
+                        )}
+                    </button>
                 </div>
+
             </div>
 
             <div className="w-full flex items-center max-w-screen-sm mx-auto mb-3 space-y-4 sm:flex sm:space-y-0">

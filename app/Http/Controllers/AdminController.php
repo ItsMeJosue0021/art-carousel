@@ -8,7 +8,13 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index(): Response {
+    public function dashboard(): Response {
         return Inertia::render('Admin/AdminDashboard');
     }
+
+    public function artworks() {
+        return Inertia::render('Admin/Artworks');
+    }
+
+
 }

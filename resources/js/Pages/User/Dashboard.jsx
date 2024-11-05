@@ -1,7 +1,8 @@
+import React from "react";
 import { Head } from '@inertiajs/react';
 import UserLayout from '@/Layouts/UserLayout';
 
-export default function Dashboard() {
+const Dashboard = () => {
     return (
         <UserLayout
             header={
@@ -24,3 +25,7 @@ export default function Dashboard() {
         </UserLayout>
     );
 }
+
+export default Dashboard;
+
+
