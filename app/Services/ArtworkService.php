@@ -7,7 +7,7 @@ use App\Models\Artwork;
 class ArtworkService
 {
     public function getAllArtwork() {
-        $artworks = Artwork::all();
+        $artworks = Artwork::paginate(2);
         return $artworks;
     }
 

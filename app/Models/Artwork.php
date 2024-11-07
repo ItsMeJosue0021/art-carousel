@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\ProductStatus;
-use App\Models\ArtMaterialCategory;
+use App\Models\ArtworkCategory;
 use Illuminate\Database\Eloquent\Model;
 
 class Artwork extends Model
@@ -19,8 +19,8 @@ class Artwork extends Model
         'image'
     ];
 
-    public function category() {
-        return $this->belongsTo(ArtMaterialCategory::class);
+    public function artworkCategory() {
+        return $this->belongsTo(ArtworkCategory::class);
     }
 
     public function status() {
