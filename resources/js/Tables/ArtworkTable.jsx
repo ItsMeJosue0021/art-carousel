@@ -1,6 +1,10 @@
 import React from "react";
 
-const ArtworkTable = ({artworks, isLoading}) => {
+const ArtworkTable = ({artworks, isLoading, handleSelectedArtwork}) => {
+
+    const passArtwork = (artwork) => {
+        handleSelectedArtwork(artwork);
+    }
 
     if (isLoading) {
         return (
@@ -29,7 +33,13 @@ const ArtworkTable = ({artworks, isLoading}) => {
         );
     }
 
-    if (artworks.length === 0) { return <div>No artworks available.</div>; }
+    if (artworks.length === 0) {
+        return (
+            <div className="w-full h-96 flex items-center justify-center">
+                <p>No artwoks available.</p>
+            </div>
+        )
+    }
 
     return (
         <div className="relative overflow-x-auto shadow sm:rounded-md bg-white p-5">
@@ -69,7 +79,7 @@ const ArtworkTable = ({artworks, isLoading}) => {
                                 {artwork.price}
                             </td>
                             <td className="px-6 py-4">
-                                <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <a onClick={() => passArtwork(artwork)} href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             </td>
                         </tr>
                     ))}

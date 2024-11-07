@@ -5,22 +5,34 @@ import ArtworkTable from "@/Tables/ArtworkTable";
 import ForApprovalArtworks from "@/Components/ForApprovalArtworks";
 import ForSaleArtworks from "@/Components/ForSaleArtworks";
 import SoldOutArtworks from "@/Components/SoldOutArtworks";
+import FormModal from "@/Components/FormModal";
 
 const Artworks = () => {
 
     const [activeTab, setActiveTab] = useState('forSale');
+    const [showAddArtworModal, setShowAddArtworModal] = useState(false);
+    const [fetchTrigger, setFetchTrigger] = useState(0);
+
+    const triggerFtech = () => {
+        setFetchTrigger(prev => prev + 1);
+    };
 
     const switchTab = (tab) => {
         setActiveTab(tab);
-    }
+    };
 
+    const openAddArtworModal = () => {
+        setShowAddArtworModal(true);
+    };
 
-
+    const closeAddArtworModal = () => {
+        setShowAddArtworModal(false);
+    };
 
     return (
         <UserLayout>
             <div className="flex flex-col gap-5 p-5">
-                <div className="border-b border-gray-200 dark:border-gray-700 bg-white rounded">
+                <div className="flex items-center justify-between pr-2 border-b border-gray-200 dark:border-gray-700 bg-white rounded">
                     <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
                         <li onClick={() => switchTab('forSale')} className="me-2">
                             <a href="#" className={`inline-flex items-center justify-center p-4 ${activeTab === 'forSale' ? 'text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500' : 'text-gray-500 border-transparent'} rounded-t-lg group`} aria-current={activeTab === 'forSale' ? 'page' : undefined}>
@@ -47,6 +59,10 @@ const Artworks = () => {
                             </a>
                         </li>
                     </ul>
+
+                    <div>
+                        <button onClick={openAddArtworModal} className="text-sm text-white bg-blue-800 hover:bg-blue-900 px-4 py-2 rounded">Add</button>
+                    </div>
                 </div>
 
                 <div>
@@ -59,7 +75,7 @@ const Artworks = () => {
                     {activeTab === 'forApproval' && (
                         <div className="flex flex-col gap-1">
                             <h1 className="text-lg font-semibold">For Approval Artworks</h1>
-                            <ForApprovalArtworks/>
+                            <ForApprovalArtworks fetchTrigger={fetchTrigger}/>
                         </div>
                     )}
                     {activeTab === 'soldOut' && (
@@ -70,6 +86,9 @@ const Artworks = () => {
                     )}
                 </div>
             </div>
+            <FormModal show={showAddArtworModal} onClose={closeAddArtworModal}>
+                <AddArtworkForm onAddSuccess={triggerFtech}/>
+            </FormModal>
         </UserLayout>
     )
 }

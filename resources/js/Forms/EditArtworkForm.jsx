@@ -4,19 +4,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import { usePage } from "@inertiajs/react";
 import api from "@/api";
 
-const AddArtworkForm = ({onAddSuccess}) => {
+const EditArtworkForm = ({artwork, onAddSuccess}) => {
     const user = usePage().props.auth.user;
 
     const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([]);
     const [errors, setErrors] = useState({});
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
-    const [artworkCategoryId, setArtworkCategoryId] = useState(1);
-    const [id, setId] = useState(0);
+    const [updatedArtwork, setUpdatedArtwork] = useState(null);
+
+    const [name, setName] = useState(artwork.name);
+    const [description, setDescription] = useState(artwork.description);
+    const [price, setPrice] = useState(artwork.price);
+    const [artworkCategoryId, setArtworkCategoryId] = useState(artwork.artworkCategoryId);
     const [image, setImage] = useState('');
-    const [imageURL, setImageURL] = useState('');
+    const [imageURL, setImageURL] = useState(`http://127.0.0.1:8000/storage/${artwork.image}`);
 
     useEffect(() => {
         fetchCategories();
@@ -38,31 +39,28 @@ const AddArtworkForm = ({onAddSuccess}) => {
         }
     }
 
-    const addArtwork = async () => {
+    const updateArtwork = async () => {
         setLoading(true);
+
         const artworkData = {
             name: name,
             description: description,
             price: price,
             artworkCategoryId: artworkCategoryId,
-            userId: user.id,
-            image: image,
+            newImage: image ?? null,
         }
 
         try {
-            const response = await api.post('/artworks', artworkData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            })
-            onAddSuccess();
-            toast.success('Artwork saved successfully!');
-            setName('');
-            setDescription('');
-            setPrice('');
-            setArtworkCategoryId(1);
-            setId('');
+            const response = await api.put(`/artworks/${artwork.id}`, artworkData);
+            console.log(response.data.data);
+            setUpdatedArtwork(response.data.data);
+            toast.success('Artwork has been updated successfully!');
+            setName(updatedArtwork.name);
+            setDescription(updatedArtwork.description);
+            setPrice(updatedArtwork.price);
+            setArtworkCategoryId(updatedArtwork.artworkCategoryId);
             setErrors({});
-            setImage(null);
-            setImageURL('');
+            setImageURL(`http://127.0.0.1:8000/storage/${updatedArtwork.image}`);
         } catch (error) {
             if (error.response && error.response.status === 422) {
                 setErrors(error.response.data.errors);
@@ -102,20 +100,17 @@ const AddArtworkForm = ({onAddSuccess}) => {
                     <p>Category</p>
                     <select value={artworkCategoryId} onChange={(e) => setArtworkCategoryId(e.target.value)} className="px-4 py-2 text-sm border border-gray-300 rounded">
                         {categories.map(category => (
-                            <option key={category.id} value={category.id}>{category.name}</option>
+                            <option key={category.id} value={category.id} selected={category.id === artworkCategoryId}>{category.name}</option>
                         ))}
                     </select>
                     {errors.artworkCategoryId && <span className="text-xs text-red-500">{errors.artworkCategoryId[0]}</span>}
                 </div>
 
-                {/* <div className="flex">
-                    <button onClick={addArtwork} className="w-full px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded">Save</button>
-                </div> */}
                 <div className="flex">
                     <button
-                        onClick={addArtwork}
+                        onClick={updateArtwork}
                         className="w-full px-4 py-2 text-sm text-white bg-blue-800 hover:bg-blue-900 rounded flex items-center justify-center"
-                        disabled={loading} // Disable button when loading
+                        disabled={loading}
                     >
                         {loading ? (
                             <svg
@@ -139,7 +134,7 @@ const AddArtworkForm = ({onAddSuccess}) => {
                                 ></path>
                             </svg>
                         ) : (
-                            'Save'
+                            'Update'
                         )}
                     </button>
                 </div>
@@ -174,4 +169,4 @@ const AddArtworkForm = ({onAddSuccess}) => {
     )
 }
 
-export default AddArtworkForm;
+export default EditArtworkForm;
