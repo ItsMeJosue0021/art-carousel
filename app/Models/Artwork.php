@@ -23,7 +23,7 @@ class Artwork extends Model
         return $this->belongsTo(ArtworkCategory::class);
     }
 
-    public function status() {
+    public function productStatus() {
         return $this->belongsTo(ProductStatus::class);
     }
 

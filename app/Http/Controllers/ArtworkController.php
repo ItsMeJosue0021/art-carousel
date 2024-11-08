@@ -92,10 +92,20 @@ class ArtworkController extends Controller
     }
 
     public function updateArtwork(UpdateArtworkRequest $request, $artworkId) {
-        $artwork = $this->artworkService->updateArtwork($request->validated(), $artworkId, $request->file('newImage'));
-        return  (new ArtworkResource($artwork))
+        $artwork = $this->artworkService->updateArtwork(
+            $request->validated(),
+            $artworkId,
+            $request->file('newImage')
+        );
+
+        return (new ArtworkResource($artwork))
                 ->response()
                 ->header('Content-Type', 'application/json')
                 ->setStatusCode(200);
+    }
+
+    public function deleteArtwork($id) {
+        $this->artworkService->deleteArtwork($id);
+        return response()->json(['message', 'The artwork has been deleted.'], 204);
     }
 }

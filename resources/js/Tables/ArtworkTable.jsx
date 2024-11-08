@@ -1,9 +1,22 @@
 import React from "react";
+import api from "@/api";
+import { toast } from 'react-toastify';
 
-const ArtworkTable = ({artworks, isLoading, handleSelectedArtwork}) => {
+const ArtworkTable = ({artworks, isLoading, handleSelectedArtwork, onDeleteSucces}) => {
 
     const passArtwork = (artwork) => {
         handleSelectedArtwork(artwork);
+    }
+
+    const deleteArtwork = async (id) => {
+        try {
+            const response = await api.delete(`/artworks/${id}`);
+            onDeleteSucces();
+            toast.success('Artwork has been deleted.')
+        } catch (error) {
+            console.log(error);
+            toast.error('Something went wrong, please try again.')
+        }
     }
 
     if (isLoading) {
@@ -59,6 +72,9 @@ const ArtworkTable = ({artworks, isLoading, handleSelectedArtwork}) => {
                             Price
                         </th>
                         <th scope="col" className="px-6 py-3">
+                            Ststus
+                        </th>
+                        <th scope="col" className="px-6 py-3">
                             Action
                         </th>
                     </tr>
@@ -79,8 +95,24 @@ const ArtworkTable = ({artworks, isLoading, handleSelectedArtwork}) => {
                                 {artwork.price}
                             </td>
                             <td className="px-6 py-4">
-                                <a onClick={() => passArtwork(artwork)} href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                {artwork.productStatusName}
                             </td>
+
+                            {artwork.productStatusId == 3 ? (
+                                <td className="px-6 py-4 flex items-center gap-4">
+                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                </td>
+                            ) : artwork.productStatusId == 2 ? (
+                                <td className="px-6 py-4 flex items-center gap-4">
+                                    <a onClick={() => passArtwork(artwork)} href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <a onClick={() => deleteArtwork(artwork.id)} href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                </td>
+                            ) : (
+                                <td className="px-6 py-4 flex items-center gap-4">
+                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                    <a onClick={() => deleteArtwork(artwork.id)} href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                </td>
+                            )}
                         </tr>
                     ))}
                 </tbody>

@@ -36,7 +36,7 @@ const ForSaleArtworks = () => {
 
     return (
         <div>
-            <ArtworkTable artworks={artworks} isLoading={isLoading}/>
+            <ArtworkTable artworks={artworks} isLoading={isLoading} onDeleteSucces={fetchForApprovalArtworks}/>
             {!isLoading && artworks.length > 0 && (
                 <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             )}

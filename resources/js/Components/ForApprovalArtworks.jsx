@@ -25,7 +25,6 @@ const ForApprovalArtworks = ({fetchTrigger}) => {
         try {
             const response = await api.get(`/${user.id}/artworks/for-approval?page=${currentPage}`);
             setArtworks(response.data.data);
-            console.log(response.data.data);
             setTotalPages(response.data.meta.last_page);
             setIsLoading(false);
         } catch (error) {
@@ -51,14 +50,14 @@ const ForApprovalArtworks = ({fetchTrigger}) => {
 
     return (
         <div>
-            <ArtworkTable artworks={artworks} isLoading={isLoading} handleSelectedArtwork={handleSelectedArtwork}/>
+            <ArtworkTable artworks={artworks} isLoading={isLoading} handleSelectedArtwork={handleSelectedArtwork} onDeleteSucces={fetchForApprovalArtworks}/>
             {!isLoading && artworks.length > 0 && (
                 <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             )}
 
             {selectedArtwork && (
                 <FormModal show={showEditModal} onClose={closeEditModal}>
-                    <EditArtworkForm artwork={selectedArtwork}/>
+                    <EditArtworkForm artwork={selectedArtwork} onEditSuccess={fetchForApprovalArtworks}/>
                 </FormModal>
             )}
         </div>

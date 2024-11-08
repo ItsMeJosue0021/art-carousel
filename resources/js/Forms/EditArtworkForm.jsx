@@ -4,14 +4,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { usePage } from "@inertiajs/react";
 import api from "@/api";
 
-const EditArtworkForm = ({artwork, onAddSuccess}) => {
+const EditArtworkForm = ({artwork, onEditSuccess}) => {
     const user = usePage().props.auth.user;
 
     const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([]);
     const [errors, setErrors] = useState({});
-    const [updatedArtwork, setUpdatedArtwork] = useState(null);
-
     const [name, setName] = useState(artwork.name);
     const [description, setDescription] = useState(artwork.description);
     const [price, setPrice] = useState(artwork.price);
@@ -41,25 +39,31 @@ const EditArtworkForm = ({artwork, onAddSuccess}) => {
 
     const updateArtwork = async () => {
         setLoading(true);
+        const artworkData = new FormData();
+        artworkData.append('name', name);
+        artworkData.append('description', description);
+        artworkData.append('price', price);
+        artworkData.append('artworkCategoryId', artworkCategoryId);
 
-        const artworkData = {
-            name: name,
-            description: description,
-            price: price,
-            artworkCategoryId: artworkCategoryId,
-            newImage: image ?? null,
+        if (image) {
+            artworkData.append('newImage', image);
         }
 
         try {
-            const response = await api.put(`/artworks/${artwork.id}`, artworkData);
-            console.log(response.data.data);
-            setUpdatedArtwork(response.data.data);
+            const response = await api.post(`/artworks/${artwork.id}`, artworkData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            onEditSuccess();
+            const updatedArtwork = response.data.data;
             toast.success('Artwork has been updated successfully!');
             setName(updatedArtwork.name);
             setDescription(updatedArtwork.description);
             setPrice(updatedArtwork.price);
             setArtworkCategoryId(updatedArtwork.artworkCategoryId);
             setErrors({});
+            setImage('');
             setImageURL(`http://127.0.0.1:8000/storage/${updatedArtwork.image}`);
         } catch (error) {
             if (error.response && error.response.status === 422) {

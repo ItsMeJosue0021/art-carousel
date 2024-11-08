@@ -98,4 +98,9 @@ class ArtworkService
 
         return $artwork;
     }
+
+    public function deleteArtwork($id) {
+        $artwork = Artwork::findOrFail($id);
+        $artwork->delete();
+    }
 }

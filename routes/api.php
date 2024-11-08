@@ -15,7 +15,8 @@ Route::controller(ArtworkController::class)->group(function () {
     Route::get('/{userId}/artworks/for-sale', 'getForSaleArtworksByUser');
     Route::get('/{userId}/artworks/sold-out', 'getSoldOutArtworksByUser');
     Route::post('/artworks', 'storeArtwork');
-    Route::put('/artworks/{artworkId}', 'updateArtwork');
+    Route::post('/artworks/{artworkId}', 'updateArtwork');
+    Route::delete('/artworks/{artworkId}', 'deleteArtwork');
 });
 
 Route::controller(ArtworkCategoryController::class)->group(function () {
