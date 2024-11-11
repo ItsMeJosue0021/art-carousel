@@ -43,16 +43,4 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
 
 
-// Route::group(['middleware' => ['role:admin']], function() {
-//     Route::get('/admin', [AdminController::class, 'index']);
-// });
-
-// Route::group(['middleware' => ['role:seller']], function() {
-//     Route::get('/seller', [SellerController::class, 'index']);
-// });
-
-// Route::group(['middleware' => ['role:customer']], function() {
-//     Route::get('/customer', [CustomerController::class, 'index']);
-// });
-
 require __DIR__ . '/auth.php';

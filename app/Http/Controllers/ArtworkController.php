@@ -23,7 +23,6 @@ class ArtworkController extends Controller
         $artworks = $this->artworkService->getAllArtwork();
         return ArtworkResource::collection($artworks)
                 ->response()
-                ->header('Content-Type', 'application/json')
                 ->setStatusCode(200);
     }
 
@@ -31,7 +30,6 @@ class ArtworkController extends Controller
         $artwork = $this->artworkService->getArtworkById($artworkId);
         return (new ArtworkResource($artwork))
                 ->response()
-                ->header('Content-Type', 'application/json')
                 ->setStatusCode(200);
     }
 
@@ -39,7 +37,6 @@ class ArtworkController extends Controller
         $artworks = $this->artworkService->getForSaleArtworks();
         return ArtworkResource::collection($artworks)
                 ->response()
-                ->header('Content-Type', 'application/json')
                 ->setStatusCode(200);
     }
 
@@ -47,7 +44,6 @@ class ArtworkController extends Controller
         $artworks = $this->artworkService->getForApprovalArtworks();
         return ArtworkResource::collection($artworks)
                 ->response()
-                ->header('Content-Type', 'application/json')
                 ->setStatusCode(200);
     }
 
@@ -55,7 +51,6 @@ class ArtworkController extends Controller
         $artworks = $this->artworkService->getSoldOutArtworks();
         return ArtworkResource::collection($artworks)
                 ->response()
-                ->header('Content-Type', 'application/json')
                 ->setStatusCode(200);
     }
 
@@ -63,7 +58,6 @@ class ArtworkController extends Controller
         $artworks = $this->artworkService->getForSaleArtworksByUser($userId);
         return ArtworkResource::collection($artworks)
                 ->response()
-                ->header('Content-Type', 'application/json')
                 ->setStatusCode(200);
     }
 
@@ -71,7 +65,6 @@ class ArtworkController extends Controller
         $artworks = $this->artworkService->getSoldOutArtworksByUser($userId);
         return ArtworkResource::collection($artworks)
                 ->response()
-                ->header('Content-Type', 'application/json')
                 ->setStatusCode(200);
     }
 
@@ -79,7 +72,6 @@ class ArtworkController extends Controller
         $artworks = $this->artworkService->getForApprovalArtworksByUser($userId);
         return ArtworkResource::collection($artworks)
                 ->response()
-                ->header('Content-Type', 'application/json')
                 ->setStatusCode(200);
     }
 
@@ -87,7 +79,6 @@ class ArtworkController extends Controller
         $artwork = $this->artworkService->storeArtwork( $request->validated(), $request->file('image'));
         return (new ArtworkResource($artwork))
                 ->response()
-                ->header('Content-Type', 'application/json')
                 ->setStatusCode(201);
     }
 
@@ -100,7 +91,6 @@ class ArtworkController extends Controller
 
         return (new ArtworkResource($artwork))
                 ->response()
-                ->header('Content-Type', 'application/json')
                 ->setStatusCode(200);
     }
 

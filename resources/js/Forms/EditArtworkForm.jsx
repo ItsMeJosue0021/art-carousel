@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { usePage } from "@inertiajs/react";
 import api from "@/api";
+import { BASE_URL } from "@/config";
 
 const EditArtworkForm = ({artwork, onEditSuccess}) => {
     const user = usePage().props.auth.user;
@@ -15,7 +16,7 @@ const EditArtworkForm = ({artwork, onEditSuccess}) => {
     const [price, setPrice] = useState(artwork.price);
     const [artworkCategoryId, setArtworkCategoryId] = useState(artwork.artworkCategoryId);
     const [image, setImage] = useState('');
-    const [imageURL, setImageURL] = useState(`http://127.0.0.1:8000/storage/${artwork.image}`);
+    const [imageURL, setImageURL] = useState(`${BASE_URL}/${artwork.image}`);
 
     useEffect(() => {
         fetchCategories();
@@ -64,7 +65,7 @@ const EditArtworkForm = ({artwork, onEditSuccess}) => {
             setArtworkCategoryId(updatedArtwork.artworkCategoryId);
             setErrors({});
             setImage('');
-            setImageURL(`http://127.0.0.1:8000/storage/${updatedArtwork.image}`);
+            setImageURL(`${BASE_URL}/${updatedArtwork.image}`);
         } catch (error) {
             if (error.response && error.response.status === 422) {
                 setErrors(error.response.data.errors);

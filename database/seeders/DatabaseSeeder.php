@@ -18,11 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       $this->call(UserSeeder::class);
-       $this->call(ArtCategorySeeder::class);
-       $this->call(ArtMaterialCategorySeeder::class);
-       $this->call(ProductStatusSeeder::class);
-       $this->call(ArtworkSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(ArtCategorySeeder::class);
+        $this->call(ArtMaterialCategorySeeder::class);
+        $this->call(ProductStatusSeeder::class);
+        $this->call(ArtworkSeeder::class);
+        $this->call(ArtMaterialSeeder::class);
 
     }
 }

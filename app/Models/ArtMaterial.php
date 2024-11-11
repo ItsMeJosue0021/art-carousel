@@ -15,14 +15,16 @@ class ArtMaterial extends Model
         'price',
         'art_material_category_id',
         'product_status_id',
+        'quantity',
         'user_id',
+        'image',
     ];
 
-    public function category() {
+    public function artMaterialCategory() {
         return $this->belongsTo(ArtMaterialCategory::class);
     }
 
-    public function status() {
+    public function productStatus() {
         return $this->belongsTo(ProductStatus::class);
     }
 

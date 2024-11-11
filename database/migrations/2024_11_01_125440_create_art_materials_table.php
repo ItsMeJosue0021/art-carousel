@@ -19,9 +19,11 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description');
             $table->double('price');
+            $table->integer('quantity');
             $table->foreignIdFor(ArtMaterialCategory::class)->constrained();
             $table->foreignIdFor(ProductStatus::class)->constrained();
             $table->foreignIdFor(User::class)->constrained();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

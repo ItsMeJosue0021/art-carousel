@@ -14,4 +14,8 @@ class UserPageController extends Controller
     public function artworks() {
         return Inertia::render('User/Artworks');
     }
+
+    public function artMaterials() {
+        return Inertia::render('User/ArtMaterials');
+    }
 }

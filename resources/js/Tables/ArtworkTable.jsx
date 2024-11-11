@@ -100,7 +100,7 @@ const ArtworkTable = ({artworks, isLoading, handleSelectedArtwork, onDeleteSucce
 
                             {artwork.productStatusId == 3 ? (
                                 <td className="px-6 py-4 flex items-center gap-4">
-                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                    <a onClick={() => passArtwork(artwork)} href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                                 </td>
                             ) : artwork.productStatusId == 2 ? (
                                 <td className="px-6 py-4 flex items-center gap-4">
@@ -109,7 +109,7 @@ const ArtworkTable = ({artworks, isLoading, handleSelectedArtwork, onDeleteSucce
                                 </td>
                             ) : (
                                 <td className="px-6 py-4 flex items-center gap-4">
-                                    <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                    <a onClick={() => passArtwork(artwork)} href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                                     <a onClick={() => deleteArtwork(artwork.id)} href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
                                 </td>
                             )}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtMaterialController;
 use App\Http\Controllers\ArtworkCategoryController;
 use App\Http\Controllers\ArtworkController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,19 @@ Route::controller(ArtworkController::class)->group(function () {
 
 Route::controller(ArtworkCategoryController::class)->group(function () {
     Route::get('/artworks-categories', 'getAllArtworkCategory');
+});
+
+Route::controller(ArtMaterialController::class)->group(function () {
+    Route::get('/materials', 'getAll');
+    Route::get('/materials/for-sale', 'allForSale');
+    Route::get('/materials/for-approval', 'allForApproval');
+    Route::get('/materials/sold-out', 'allSoldOut');
+    Route::get('/{id}/materials/for-sale', 'allForSaleByUser');
+    Route::get('/{id}/materials/for-approval', 'allForApprovalByUser');
+    Route::get('/{id}/materials/sold-out', 'allSoldOutByUser');
+    Route::post('/materials', 'store');
+    Route::post('/materials/{id}', 'update');
+    Route::delete('/materials/{id}', 'delete');
 });
 
 
