@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { usePage } from "@inertiajs/react";
 import api from "@/api";
 
-const AddArtworkForm = ({onAddSuccess}) => {
+const AddMaterialForm = ({onAddSuccess}) => {
     const user = usePage().props.auth.user;
 
     const [loading, setLoading] = useState(false);
@@ -13,7 +13,8 @@ const AddArtworkForm = ({onAddSuccess}) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [artworkCategoryId, setArtworkCategoryId] = useState(1);
+    const [quantity, setQuantity] = useState('');
+    const [artMaterialCategoryId, setArtMaterialCategoryId] = useState(1);
     const [image, setImage] = useState('');
     const [imageURL, setImageURL] = useState('');
 
@@ -37,27 +38,31 @@ const AddArtworkForm = ({onAddSuccess}) => {
         }
     }
 
-    const addArtwork = async () => {
+    const addMaterial = async () => {
         setLoading(true);
-        const artworkData = {
+
+        const materialData = {
             name: name,
             description: description,
             price: price,
-            artworkCategoryId: artworkCategoryId,
+            quantity: quantity,
+            artMaterialCategoryId: artMaterialCategoryId,
             userId: user.id,
             image: image,
         }
 
         try {
-            const response = await api.post('/artworks', artworkData, {
+            const response = await api.post('/materials', materialData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             })
+
             onAddSuccess();
             toast.success('Artwork saved successfully!');
             setName('');
             setDescription('');
             setPrice('');
-            setArtworkCategoryId(1);
+            setQuantity('');
+            setArtMaterialCategoryId(1);
             setErrors({});
             setImage(null);
             setImageURL('');
@@ -67,13 +72,12 @@ const AddArtworkForm = ({onAddSuccess}) => {
                 console.log(errors)
             } else {
                 console.error('Error posting data:', error);
-                toast.error('Failed to save artwork.');
+                toast.error('Failed to save material.');
             }
         } finally {
             setLoading(false);
         }
     }
-
 
     return (
         <div className="w-auto min-w-[1000px] text-sm p-6 flex items-start gap-5">
@@ -97,18 +101,24 @@ const AddArtworkForm = ({onAddSuccess}) => {
                 </div>
 
                 <div className="flex flex-col space-y-1">
+                    <p>Quantity</p>
+                    <input value={quantity} onChange={(e) => setQuantity(e.target.value)} type="number" placeholder="Quantity.." className="px-4 py-2 text-sm border border-gray-300 rounded"/>
+                    {errors.quantity && <span className="text-xs text-red-500">{errors.quantity[0]}</span>}
+                </div>
+
+                <div className="flex flex-col space-y-1">
                     <p>Category</p>
-                    <select value={artworkCategoryId} onChange={(e) => setArtworkCategoryId(e.target.value)} className="px-4 py-2 text-sm border border-gray-300 rounded">
+                    <select value={artMaterialCategoryId} onChange={(e) => setArtMaterialCategoryId(e.target.value)} className="px-4 py-2 text-sm border border-gray-300 rounded">
                         {categories.map(category => (
                             <option key={category.id} value={category.id}>{category.name}</option>
                         ))}
                     </select>
-                    {errors.artworkCategoryId && <span className="text-xs text-red-500">{errors.artworkCategoryId[0]}</span>}
+                    {errors.artMaterialCategoryId && <span className="text-xs text-red-500">{errors.artMaterialCategoryId[0]}</span>}
                 </div>
 
                 <div className="flex">
                     <button
-                        onClick={addArtwork}
+                        onClick={addMaterial}
                         className="w-full px-4 py-2 text-sm text-white bg-blue-800 hover:bg-blue-900 rounded flex items-center justify-center"
                         disabled={loading}
                     >
@@ -169,4 +179,4 @@ const AddArtworkForm = ({onAddSuccess}) => {
     )
 }
 
-export default AddArtworkForm;
+export default AddMaterialForm;

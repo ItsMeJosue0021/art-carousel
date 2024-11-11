@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { usePage } from "@inertiajs/react";
 import ArtworkTable from "@/Tables/ArtworkTable";
 import api from "@/api";
-import Pagination from "./Pagination";
-import FormModal from "./FormModal";
-import ArtworkDetails from "./ArtworkDetails";
+import Pagination from "./../Pagination";
+import FormModal from "./../FormModal";
+import ArtworkDetails from "./../ArtworkDetails";
 
 const SoldOutArtworks = () => {
     const user = usePage().props.auth.user;

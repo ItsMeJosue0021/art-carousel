@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('art_materials', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->double('price');
             $table->integer('quantity');
             $table->foreignIdFor(ArtMaterialCategory::class)->constrained();

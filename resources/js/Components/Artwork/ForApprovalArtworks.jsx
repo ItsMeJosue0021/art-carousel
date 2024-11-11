@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { usePage } from "@inertiajs/react";
 import ArtworkTable from "@/Tables/ArtworkTable";
 import api from "@/api";
-import Pagination from "./Pagination";
-import FormModal from "./FormModal";
-import ArtworkDetails from "./ArtworkDetails";
+import Pagination from "./../Pagination";
+import FormModal from "./../FormModal";
+import EditArtworkForm from "@/Forms/EditArtworkForm";
 
-const ForSaleArtworks = () => {
+const ForApprovalArtworks = ({fetchTrigger}) => {
     const user = usePage().props.auth.user;
 
     const [artworks, setArtworks] = useState([]);
@@ -15,15 +15,15 @@ const ForSaleArtworks = () => {
     const [totalPages, setTotalPages] = useState(0);
 
     const [selectedArtwork, setSelectedArtwork] = useState(null);
-    const [showDetailModal, setShowDetailModal] = useState(false);
+    const [showEditModal, setShowAddArtworModal] = useState(false);
 
     useEffect(() => {
         fetchForApprovalArtworks();
-    }, [currentPage]);
+    }, [currentPage, fetchTrigger]);
 
     const fetchForApprovalArtworks = async () => {
         try {
-            const response = await api.get(`/${user.id}/artworks/for-sale?page=${currentPage}`);
+            const response = await api.get(`/${user.id}/artworks/for-approval?page=${currentPage}`);
             setArtworks(response.data.data);
             setTotalPages(response.data.meta.last_page);
             setIsLoading(false);
@@ -31,7 +31,7 @@ const ForSaleArtworks = () => {
             console.log(error);
             setIsLoading(false);
         }
-    }
+    };
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -39,38 +39,29 @@ const ForSaleArtworks = () => {
 
     const handleSelectedArtwork = (artwork) => {
         setSelectedArtwork(artwork);
-        setShowDetailModal(true);
+        setShowAddArtworModal(true);
+        console.log(artwork);
     }
 
-    const closeDetailModal = () => {
-        setShowDetailModal(false);
+    const closeEditModal = () => {
+        setShowAddArtworModal(false);
     }
 
 
     return (
         <div>
-            <ArtworkTable
-            artworks={artworks}
-            isLoading={isLoading}
-            onDeleteSucces={fetchForApprovalArtworks}
-            handleSelectedArtwork={handleSelectedArtwork}/>
+            <ArtworkTable artworks={artworks} isLoading={isLoading} handleSelectedArtwork={handleSelectedArtwork} onDeleteSucces={fetchForApprovalArtworks}/>
             {!isLoading && artworks.length > 0 && (
-                <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange} />
+                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             )}
+
             {selectedArtwork && (
-                <FormModal
-                show={showDetailModal}
-                onClose={closeDetailModal}>
-                    <ArtworkDetails artwork={selectedArtwork}/>
+                <FormModal show={showEditModal} onClose={closeEditModal}>
+                    <EditArtworkForm artwork={selectedArtwork} onEditSuccess={fetchForApprovalArtworks}/>
                 </FormModal>
             )}
         </div>
     )
 }
 
-export default ForSaleArtworks;
-
-
+export default ForApprovalArtworks;

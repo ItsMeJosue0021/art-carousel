@@ -31,6 +31,7 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
     Route::prefix('u')->controller(UserPageController::class)->group(function () {
         Route::get('/dashboard', 'dashboard')->name('user.dashboard');
         Route::get('/artworks', 'artworks')->name('user.artworks');
+        Route::get('/materials', 'materials')->name('user.materials');
     });
 });
 

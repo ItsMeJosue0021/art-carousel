@@ -28,7 +28,7 @@ class StoreArtMertialRequest extends FormRequest
             'artMaterialCategoryId' => 'required|exists:art_material_categories,id',
             'quantity' => 'required|numeric|min:0',
             'userId' => 'required|exists:users,id',
-            'image' => 'nullable|image',
+            'image' => 'required|image',
         ];
     }
 }

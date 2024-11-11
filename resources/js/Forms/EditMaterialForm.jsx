@@ -3,29 +3,31 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { usePage } from "@inertiajs/react";
 import api from "@/api";
+import { BASE_URL } from "@/config";
 
-const AddArtworkForm = ({onAddSuccess}) => {
+const EditMaterialForm = ({material, onEditSuccess}) => {
     const user = usePage().props.auth.user;
 
     const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([]);
     const [errors, setErrors] = useState({});
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
-    const [artworkCategoryId, setArtworkCategoryId] = useState(1);
+    const [name, setName] = useState(material.name);
+    const [description, setDescription] = useState(material.description);
+    const [price, setPrice] = useState(material.price);
+    const [quantity, setQuantity] = useState(material.quantity);
+    const [artMaterialCategoryId, setArtMaterialCategoryId] = useState(material.artMaterialCategoryId);
     const [image, setImage] = useState('');
-    const [imageURL, setImageURL] = useState('');
+    const [imageURL, setImageURL] = useState(`${BASE_URL}/${material.image}`);
 
     useEffect(() => {
         fetchCategories();
     }, []);
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setImage(file);
-        setImageURL(URL.createObjectURL(file));
-    }
+            const file = e.target.files[0];
+            setImage(file);
+            setImageURL(URL.createObjectURL(file));
+        }
 
     const fetchCategories = async () => {
         try {
@@ -37,37 +39,43 @@ const AddArtworkForm = ({onAddSuccess}) => {
         }
     }
 
-    const addArtwork = async () => {
+    const updateMaterial = async () => {
         setLoading(true);
-        const artworkData = {
-            name: name,
-            description: description,
-            price: price,
-            artworkCategoryId: artworkCategoryId,
-            userId: user.id,
-            image: image,
+        const materialData = new FormData();
+        materialData.append('name', name);
+        materialData.append('description', description);
+        materialData.append('price', price);
+        materialData.append('quantity', quantity);
+        materialData.append('artMaterialCategoryId', artMaterialCategoryId);
+
+        if (image) {
+            materialData.append('image', image);
         }
 
         try {
-            const response = await api.post('/artworks', artworkData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            })
-            onAddSuccess();
-            toast.success('Artwork saved successfully!');
-            setName('');
-            setDescription('');
-            setPrice('');
-            setArtworkCategoryId(1);
+            const response = await api.post(`/materials/${material.id}`, materialData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            onEditSuccess();
+            const updatedMaterial = response.data.data;
+            toast.success('The art material has been updated successfully!');
+            setName(updatedMaterial.name);
+            setDescription(updatedMaterial.description);
+            setPrice(updatedMaterial.price);
+            setQuantity(updatedMaterial.quantity);
+            setArtMaterialCategoryId(updatedMaterial.artMaterialCategoryId);
             setErrors({});
-            setImage(null);
-            setImageURL('');
+            setImage('');
+            setImageURL(`${BASE_URL}/${updatedMaterial.image}`);
         } catch (error) {
             if (error.response && error.response.status === 422) {
                 setErrors(error.response.data.errors);
                 console.log(errors)
             } else {
                 console.error('Error posting data:', error);
-                toast.error('Failed to save artwork.');
+                toast.error('Failed to save material.');
             }
         } finally {
             setLoading(false);
@@ -97,18 +105,24 @@ const AddArtworkForm = ({onAddSuccess}) => {
                 </div>
 
                 <div className="flex flex-col space-y-1">
+                    <p>Price</p>
+                    <input value={quantity} onChange={(e) => setQuantity(e.target.value)} type="number" placeholder="Quantity.." className="px-4 py-2 text-sm border border-gray-300 rounded"/>
+                    {errors.quantity && <span className="text-xs text-red-500">{errors.quantity[0]}</span>}
+                </div>
+
+                <div className="flex flex-col space-y-1">
                     <p>Category</p>
-                    <select value={artworkCategoryId} onChange={(e) => setArtworkCategoryId(e.target.value)} className="px-4 py-2 text-sm border border-gray-300 rounded">
+                    <select value={artMaterialCategoryId} onChange={(e) => setArtMaterialCategoryId(e.target.value)} className="px-4 py-2 text-sm border border-gray-300 rounded">
                         {categories.map(category => (
-                            <option key={category.id} value={category.id}>{category.name}</option>
+                            <option key={category.id} value={category.id} selected={category.id === artMaterialCategoryId}>{category.name}</option>
                         ))}
                     </select>
-                    {errors.artworkCategoryId && <span className="text-xs text-red-500">{errors.artworkCategoryId[0]}</span>}
+                    {errors.artMaterialCategoryId && <span className="text-xs text-red-500">{errors.artMaterialCategoryId[0]}</span>}
                 </div>
 
                 <div className="flex">
                     <button
-                        onClick={addArtwork}
+                        onClick={updateMaterial}
                         className="w-full px-4 py-2 text-sm text-white bg-blue-800 hover:bg-blue-900 rounded flex items-center justify-center"
                         disabled={loading}
                     >
@@ -134,7 +148,7 @@ const AddArtworkForm = ({onAddSuccess}) => {
                                 ></path>
                             </svg>
                         ) : (
-                            'Save'
+                            'Update'
                         )}
                     </button>
                 </div>
@@ -169,4 +183,4 @@ const AddArtworkForm = ({onAddSuccess}) => {
     )
 }
 
-export default AddArtworkForm;
+export default EditMaterialForm;
