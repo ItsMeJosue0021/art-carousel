@@ -49,7 +49,7 @@ const ForSaleMaterial = () => {
 
     return (
         <div>
-            <MaterialTable materials={materials} isLoading={isLoading} handleSelectedMaterial={handleSelectedArtwork}/>
+            <MaterialTable materials={materials} isLoading={isLoading} handleSelectedMaterial={handleSelectedArtwork} onDeleteSucces={fetchMaterials}/>
             {!isLoading && materials.length > 0 && (
                 <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             )}

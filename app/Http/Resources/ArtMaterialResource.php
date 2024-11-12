@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -26,8 +27,8 @@ class ArtMaterialResource extends JsonResource
             'productStatusName' => $this->productStatus->name,
             'userId' => $this->user_id,
             'image' => $this->image,
-            'createdAt' => $this->created_at,
-            'updatedAt' => $this->updated_at,
+            'created_at' => Carbon::parse($this->created_at)->format('F j, Y'),
+            'updated_at' => Carbon::parse($this->updated_at)->format('F j, Y'),
         ];
     }
 }

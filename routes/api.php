@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArtMaterialController;
 use App\Http\Controllers\ArtworkCategoryController;
 use App\Http\Controllers\ArtworkController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,4 +38,7 @@ Route::controller(ArtMaterialController::class)->group(function () {
     Route::delete('/materials/{id}', 'delete');
 });
 
+Route::controller(CartController::class)->group(function () {
+    Route::post('/{id}/add-to-cart', 'addToCart');
+});
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->string('status')->default('active');
-            $table->double('total_amount');
+            $table->double('total_amount')->nullable();
             $table->timestamps();
         });
     }

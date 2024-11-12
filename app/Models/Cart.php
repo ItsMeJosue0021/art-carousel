@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Order;
+use App\Models\CartItem;
 use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
@@ -20,5 +21,9 @@ class Cart extends Model
 
     public function order() {
         return $this->hasOne(Order::class);
+    }
+
+    public function cartItems() {
+        return $this->hasMany(CartItem::class);
     }
 }

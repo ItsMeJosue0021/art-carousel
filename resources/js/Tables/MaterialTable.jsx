@@ -1,9 +1,21 @@
 import React from "react";
+import api from "@/api";
+import { toast } from 'react-toastify';
 
-const MaterialTable = ({materials, isLoading, handleSelectedMaterial}) => {
+const MaterialTable = ({materials, isLoading, handleSelectedMaterial, onDeleteSucces}) => {
 
     const passMaterial = (material) => {
         handleSelectedMaterial(material);
+    }
+
+    const deleteMaterial = async (id) => {
+        api.delete(`/materials/${id}`).then(() => {
+            onDeleteSucces();
+            toast.success('Art aterial has been deleted.')
+        }).catch((error) => {
+            console.log(error);
+            toast.error('Something went wrong, please try again.')
+        });
     }
 
 
@@ -94,17 +106,17 @@ const MaterialTable = ({materials, isLoading, handleSelectedMaterial}) => {
 
                             {material.productStatusId == 3 ? (
                                 <td className="px-6 py-4 flex items-center gap-4">
-                                    <a onClick={() => passMaterial(material)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                    <a onClick={() => passMaterial(material)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">View</a>
                                 </td>
                             ) : material.productStatusId == 2 ? (
                                 <td className="px-6 py-4 flex items-center gap-4">
-                                    <a onClick={() => passMaterial(material)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    <a className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                    <a onClick={() => passMaterial(material)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">Edit</a>
+                                    <a onClick={() => deleteMaterial(material.id)} className="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">Delete</a>
                                 </td>
                             ) : (
                                 <td className="px-6 py-4 flex items-center gap-4">
-                                    <a onClick={() => passMaterial(material)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                                    <a className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                    <a onClick={() => passMaterial(material)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">View</a>
+                                    <a onClick={() => deleteMaterial(material.id)} className="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">Delete</a>
                                 </td>
                             )}
                         </tr>

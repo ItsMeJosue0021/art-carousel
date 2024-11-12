@@ -49,7 +49,7 @@ const ForApprovalMaterial = ({fetchTrigger}) => {
 
     return (
         <div>
-            <MaterialTable materials={materials} isLoading={isLoading} handleSelectedMaterial={handleSelectedMaterial}/>
+            <MaterialTable materials={materials} isLoading={isLoading} handleSelectedMaterial={handleSelectedMaterial} onDeleteSucces={fetchMaterials}/>
             {!isLoading && materials.length > 0 && (
                 <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             )}
