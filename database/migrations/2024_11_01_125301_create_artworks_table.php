@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('artworks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->double('price');
             $table->foreignIdFor(ArtworkCategory::class)->constrained();
             $table->foreignIdFor(ProductStatus::class)->constrained();

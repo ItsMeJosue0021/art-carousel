@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -17,9 +18,12 @@ Route::get('/', function () {
     ]);
 })->name('welcome');
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::controller(PageController::class)->group(function () {
+    Route::get('/gallery', 'gallery')->name('gallery');
+    Route::get('/materials', 'materials')->name('materials');
+    Route::get('/community', 'community')->name('community');
+    Route::get('/exhibit', 'exhibit')->name('exhibit');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

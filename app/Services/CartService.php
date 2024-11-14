@@ -37,14 +37,14 @@ class CartService
                 $this->cartItemService->store($item, $cart->id);
                 $cart->total_amount = $this->getTotalAmount($item, $cart);
                 $cart->save();
-                return $cart;
+                // return $cart->with('cartItems');
             } else {
                 // if none, create a new cart and add the item to it
                 $newCart = $this->store($userId);
                 $this->cartItemService->store($item, $newCart->id);
                 $newCart->total_amount = $this->getTotalAmount($item, $newCart);
                 $newCart->save();
-                return $cart->with('cartItems');
+                // return $newCart->with('cartItems');
             }
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

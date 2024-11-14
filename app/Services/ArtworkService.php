@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Artwork;
+use App\Models\ArtworkCategory;
 
 class ArtworkService
 {
@@ -16,10 +17,23 @@ class ArtworkService
         return $artwork;
     }
 
-    public function getForSaleArtworks() {
-        $artworks = Artwork::where('product_status_id', 1)
-                        ->latest()
-                        ->paginate(12);
+    public function getForSaleArtworks($request) {
+
+        $query = Artwork::where('product_status_id', 1);
+
+        if ($request->has('category')) {
+            $category = ArtworkCategory::where('name', $request->input('category'))->first();
+            $query->where('artwork_category_id', $category->id);
+        }
+
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->where('name', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('description', 'like', '%' . $searchTerm . '%');
+        }
+
+        $artworks = $query->latest()->paginate(12);
+
         return $artworks;
     }
 

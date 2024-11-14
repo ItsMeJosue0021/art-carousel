@@ -11,7 +11,7 @@ Route::controller(ArtworkController::class)->group(function () {
     Route::get('/artworks', 'getAllArtwork');
     Route::get('/artworks/{artworkId}', 'getArtworkById');
     Route::get('/artworks/for-approval', 'getForApprovalArtworks');
-    Route::get('/artworks/for-sale', 'getForSaleArtworks');
+    Route::get('/for-sale/artworks', 'getForSaleArtworks');
     Route::get('/artworks/sold-out', 'getSoldOutArtworks');
     Route::get('/{userId}/artworks/for-approval', 'getForApprovalArtworksByUser');
     Route::get('/{userId}/artworks/for-sale', 'getForSaleArtworksByUser');

@@ -33,8 +33,8 @@ class ArtworkController extends Controller
                 ->setStatusCode(200);
     }
 
-    public function getForSaleArtworks() {
-        $artworks = $this->artworkService->getForSaleArtworks();
+    public function getForSaleArtworks(Request $request) {
+        $artworks = $this->artworkService->getForSaleArtworks($request);
         return ArtworkResource::collection($artworks)
                 ->response()
                 ->setStatusCode(200);

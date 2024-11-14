@@ -24,7 +24,7 @@ class AddToCartRequest extends FormRequest
         return [
             'productId' => 'required|integer',
             'productType' => 'required|string|in:artwork,material',
-            'quantity' => 'required|integer|min:1',
+            'quantity' => 'nullable|integer|min:1',
         ];
     }
 }
