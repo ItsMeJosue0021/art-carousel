@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Route;
 Route::controller(ArtworkController::class)->group(function () {
     Route::get('/artworks', 'getAllArtwork');
     Route::get('/artworks/{artworkId}', 'getArtworkById');
-    Route::get('/artworks/for-approval', 'getForApprovalArtworks');
+    Route::get('/for-approval/artworks', 'getForApprovalArtworks');
     Route::get('/for-sale/artworks', 'getForSaleArtworks');
-    Route::get('/artworks/sold-out', 'getSoldOutArtworks');
+    Route::get('/sold-out/artworks', 'getSoldOutArtworks');
     Route::get('/{userId}/artworks/for-approval', 'getForApprovalArtworksByUser');
     Route::get('/{userId}/artworks/for-sale', 'getForSaleArtworksByUser');
     Route::get('/{userId}/artworks/sold-out', 'getSoldOutArtworksByUser');
@@ -27,9 +27,9 @@ Route::controller(ArtworkCategoryController::class)->group(function () {
 
 Route::controller(ArtMaterialController::class)->group(function () {
     Route::get('/materials', 'getAll');
-    Route::get('/materials/for-sale', 'allForSale');
-    Route::get('/materials/for-approval', 'allForApproval');
-    Route::get('/materials/sold-out', 'allSoldOut');
+    Route::get('/for-sale/materials', 'allForSale');
+    Route::get('/for-approval/materials', 'allForApproval');
+    Route::get('/sold-out/materials', 'allSoldOut');
     Route::get('/{id}/materials/for-sale', 'allForSaleByUser');
     Route::get('/{id}/materials/for-approval', 'allForApprovalByUser');
     Route::get('/{id}/materials/sold-out', 'allSoldOutByUser');

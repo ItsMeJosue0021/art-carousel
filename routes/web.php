@@ -43,6 +43,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::prefix('a')->controller(AdminController::class)->group(function () {
         Route::get('/dashboard', 'dashboard')->name('admin.dashboard');
         Route::get('/artworks', 'artworks')->name('admin.artworks');
+        Route::get('/materials', 'materials')->name('admin.materials');
     });
 });
 

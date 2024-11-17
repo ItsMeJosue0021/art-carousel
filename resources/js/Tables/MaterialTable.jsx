@@ -110,12 +110,14 @@ const MaterialTable = ({materials, isLoading, handleSelectedMaterial, onDeleteSu
                                 </td>
                             ) : material.productStatusId == 2 ? (
                                 <td className="px-6 py-4 flex items-center gap-4">
-                                    <a onClick={() => passMaterial(material)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">Edit</a>
-                                    <a onClick={() => deleteMaterial(material.id)} className="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">Delete</a>
+                                    {/* <a onClick={() => passMaterial(material)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">Edit</a>
+                                    <a onClick={() => deleteMaterial(material.id)} className="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">Delete</a> */}
+                                    <a onClick={() => passMaterial(material)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">View</a>
                                 </td>
                             ) : (
                                 <td className="px-6 py-4 flex items-center gap-4">
                                     <a onClick={() => passMaterial(material)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">View</a>
+                                    {/* <a onClick={() => passMaterial(material)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">Edit</a> */}
                                     <a onClick={() => deleteMaterial(material.id)} className="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">Delete</a>
                                 </td>
                             )}

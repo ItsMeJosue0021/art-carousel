@@ -6,6 +6,7 @@ import ViewMoreModal from "@/Components/ViewMoreModal";
 import ViewMore from "@/Components/ViewMore";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useTruncateText from "@/Hooks/useTruncateText";
 
 
 const Gallery = () => {

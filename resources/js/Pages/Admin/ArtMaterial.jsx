@@ -1,12 +1,12 @@
-import React, { useState } from "react";
 import AdminLayout from "@/Layouts/AdminLayout";
-import { Head, usePage } from "@inertiajs/react";
+import React from "react";
+import SoldOutMaterial from "@/Components/ArtMaterial/SoldOutMaterial";
+import ForSaleMaterial from "@/Components/ArtMaterial/ForSaleMaterial";
+import ForApprovalMaterial from "@/Components/ArtMaterial/ForApprovalMaterial";
 import ArtworkPageHeader from "@/Components/Artwork/ArtworkPageHeader";
-import ForSaleArtworks from "@/Components/Artwork/ForSaleArtworks";
-import ForApprovalArtworks from "@/Components/Artwork/ForApprovalArtworks";
-import SoldOutArtworks from "@/Components/Artwork/SoldOutArtworks";
 
-const Artworks = () => {
+
+const ArtMaterial = () => {
     const role = usePage().props.auth.role;
 
     const [activeTab, setActiveTab] = useState('forSale');
@@ -17,26 +17,26 @@ const Artworks = () => {
 
     return (
         <AdminLayout>
-            <Head title="Artworks" />
+            <Head title="Art Materials" />
             <div className="flex flex-col gap-5 p-5">
                 <ArtworkPageHeader switchTab={switchTab} activeTab={activeTab} role={role}/>
                 <div>
                     {activeTab === 'forSale' && (
                         <div className="flex flex-col gap-1">
-                            <h1 className="text-lg font-semibold">For Sale Artworks</h1>
-                            <ForSaleArtworks/>
+                            <h1 className="text-lg font-semibold">For Sale Materials</h1>
+                            <ForSaleMaterial />
                         </div>
                     )}
                     {activeTab === 'forApproval' && (
                         <div className="flex flex-col gap-1">
-                            <h1 className="text-lg font-semibold">For Approval Artworks</h1>
-                            <ForApprovalArtworks/>
+                            <h1 className="text-lg font-semibold">For Approval Materials</h1>
+                            <ForApprovalMaterial fetchTrigger={fetchTrigger} />
                         </div>
                     )}
                     {activeTab === 'soldOut' && (
                         <div className="flex flex-col gap-1">
-                            <h1 className="text-lg font-semibold">Sold Out Artworks</h1>
-                            <SoldOutArtworks/>
+                            <h1 className="text-lg font-semibold">Sold Out Materials</h1>
+                            <SoldOutMaterial/>
                         </div>
                     )}
                 </div>
@@ -45,4 +45,4 @@ const Artworks = () => {
     )
 }
 
-export default Artworks;
+export default ArtMaterial;

@@ -8,6 +8,7 @@ import ArtworkDetails from "./../ArtworkDetails";
 
 const SoldOutArtworks = () => {
     const user = usePage().props.auth.user;
+    const role = usePage().props.auth.role;
 
     const [artworks, setArtworks] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -23,10 +24,17 @@ const SoldOutArtworks = () => {
 
     const fetchForApprovalArtworks = async () => {
         try {
-            const response = await api.get(`/${user.id}/artworks/sold-out?page=${currentPage}`);
-            setArtworks(response.data.data);
-            setTotalPages(response.data.meta.last_page);
-            setIsLoading(false);
+            if (role === 'admin') {
+                const response = await api.get(`/sold-out/artworks?page=${currentPage}`);
+                setArtworks(response.data.data);
+                setTotalPages(response.data.meta.last_page);
+                setIsLoading(false);
+            } else if (role === 'user') {
+                const response = await api.get(`/${user.id}/artworks/sold-out?page=${currentPage}`);
+                setArtworks(response.data.data);
+                setTotalPages(response.data.meta.last_page);
+                setIsLoading(false);
+            }
         } catch (error) {
             console.log(error);
             setIsLoading(false);

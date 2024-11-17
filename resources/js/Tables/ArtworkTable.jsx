@@ -1,8 +1,10 @@
 import React from "react";
 import api from "@/api";
 import { toast } from 'react-toastify';
+import { usePage } from "@inertiajs/react";
 
 const ArtworkTable = ({artworks, isLoading, handleSelectedArtwork, onDeleteSucces}) => {
+    const role = usePage().props.auth.role;
 
     const passArtwork = (artwork) => {
         handleSelectedArtwork(artwork);
@@ -104,8 +106,12 @@ const ArtworkTable = ({artworks, isLoading, handleSelectedArtwork, onDeleteSucce
                                 </td>
                             ) : artwork.productStatusId == 2 ? (
                                 <td className="px-6 py-4 flex items-center gap-4">
-                                    <a onClick={() => passArtwork(artwork)} href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    <a onClick={() => deleteArtwork(artwork.id)} href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                    <a onClick={() => passArtwork(artwork)} href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                        View
+                                    </a>
+                                    {role === 'user' && (
+                                        <a onClick={() => deleteArtwork(artwork.id)} href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                    )}
                                 </td>
                             ) : (
                                 <td className="px-6 py-4 flex items-center gap-4">

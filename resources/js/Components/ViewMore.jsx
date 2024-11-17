@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BASE_URL } from "@/config";
 import api from "@/api";
 import { usePage } from "@inertiajs/react";
+import { router } from '@inertiajs/react'
 import { toast } from 'react-toastify';
 
 const ViewMore = ({product, productType}) => {
@@ -12,6 +13,11 @@ const ViewMore = ({product, productType}) => {
     const [productId, setProductId] = useState(product.id);
 
     const addToCart = () => {
+        if (!user) {
+            router.visit('/login');
+            return;
+        }
+
         const item = {
             productId: productId,
             productType: productType,

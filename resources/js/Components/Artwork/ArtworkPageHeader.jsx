@@ -1,6 +1,6 @@
 import React from "react";
 
-const ArtworkPageHeader = ({switchTab, activeTab, openAddMaterialModal}) => {
+const ArtworkPageHeader = ({switchTab, activeTab, openAddMaterialModal, role}) => {
     return (
         <div className="flex items-center justify-between pr-2 border-b border-gray-200 dark:border-gray-700 bg-white rounded">
             <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
@@ -30,9 +30,11 @@ const ArtworkPageHeader = ({switchTab, activeTab, openAddMaterialModal}) => {
                 </li>
             </ul>
 
-            <div>
-                <button onClick={openAddMaterialModal} className="text-sm text-white bg-blue-800 hover:bg-blue-900 px-4 py-2 rounded">Add</button>
-            </div>
+            {role === 'user' ?? (
+                <div>
+                    <button onClick={openAddMaterialModal} className="text-sm text-white bg-blue-800 hover:bg-blue-900 px-4 py-2 rounded">Add</button>
+                </div>
+            )}
         </div>
     )
 }

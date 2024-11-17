@@ -36,7 +36,7 @@ class ArtMaterialService
         $artworks = ArtMaterial::where('user_id', $userId)
                         ->where('product_status_id', 1)
                         ->latest()
-                        ->paginate(1);
+                        ->paginate(12);
         return $artworks;
     }
 
@@ -44,7 +44,7 @@ class ArtMaterialService
         $artworks = ArtMaterial::where('user_id', $userId)
                         ->where('product_status_id', 2)
                         ->latest()
-                        ->paginate(1);
+                        ->paginate(12);
         return $artworks;
     }
 
@@ -52,7 +52,7 @@ class ArtMaterialService
         $artworks = ArtMaterial::where('user_id', $userId)
                         ->where('product_status_id', 3)
                         ->latest()
-                        ->paginate(1);
+                        ->paginate(12);
         return $artworks;
     }
 

@@ -5,10 +5,12 @@ import MaterialTable from "@/Tables/MaterialTable";
 import { usePage } from "@inertiajs/react";
 import Pagination from "../Pagination";
 import FormModal from "../FormModal";
+import EditMaterialForm from "@/Forms/EditMaterialForm";
 import ArtMaterialDetails from "./ArtMaterialDetails";
 
 const ForSaleMaterial = () => {
     const user = usePage().props.auth.user;
+    const role = usePage().props.auth.role;
 
     const [materials, setMaterials] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -24,10 +26,17 @@ const ForSaleMaterial = () => {
 
     const fetchMaterials = async () => {
         try {
-            const response = await api.get(`/${user.id}/materials/for-sale?page=${currentPage}`);
-            setMaterials(response.data.data);
-            setTotalPages(response.data.meta.last_page);
-            setIsLoading(false);
+            if (role === 'admin') {
+                const response = await api.get(`/for-sale/materials?page=${currentPage}`);
+                setMaterials(response.data.data);
+                setTotalPages(response.data.meta.last_page);
+                setIsLoading(false);
+            } else if (role === 'user') {
+                const response = await api.get(`/${user.id}/materials/for-sale?page=${currentPage}`);
+                setMaterials(response.data.data);
+                setTotalPages(response.data.meta.last_page);
+                setIsLoading(false);
+            }
         } catch (error) {
             console.log(error);
             setIsLoading(false);
@@ -53,12 +62,11 @@ const ForSaleMaterial = () => {
             {!isLoading && materials.length > 0 && (
                 <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
             )}
-            {selectedMaterial && (
+           {selectedMaterial && (
                 <FormModal show={showDetailModal} onClose={closeDetailModal}>
                     <ArtMaterialDetails material={selectedMaterial}/>
                 </FormModal>
             )}
-
         </div>
     )
 }
