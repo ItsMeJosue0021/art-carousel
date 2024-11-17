@@ -4,6 +4,8 @@ import logo from '@/Assets/logo.png';
 import NavDropdown from '@/Components/NavDropdown';
 import { useEffect, useState } from 'react';
 import api from '@/api';
+import FormModal from "@/Components/FormModal";
+import Cart from "@/Components/Cart";
 
 const WebLayout = ({children}) => {
 
@@ -11,6 +13,7 @@ const WebLayout = ({children}) => {
     const role = usePage().props.auth.role;
 
     const [items, setItems] = useState([]);
+    const [openCart, setOpenCart] = useState(false);
 
     const fetchArtworkCategories = () => {
         api.get('/artworks-categories').then((response) => {
@@ -24,6 +27,9 @@ const WebLayout = ({children}) => {
         fetchArtworkCategories();
     }, []);
 
+    const handleCartClick = () => {
+        setOpenCart(!openCart);
+    }
 
     return (
 
@@ -36,13 +42,18 @@ const WebLayout = ({children}) => {
                     <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <nav className="-mx-3 flex flex-1 justify-end">
                         {user ? (
-                            <Link
-                                href={route(role === 'admin' ? 'admin.dashboard' : 'user.dashboard')}
-                                className="rounded-md px-3 py-2 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            >
-                                Dashboard <span className='text-white'>{role}</span>
-                            </Link>
-
+                            <div className="flex items-center gap-4">
+                                <Link
+                                    href={route(role === 'admin' ? 'admin.dashboard' : 'user.dashboard')}
+                                    className="rounded-md px-3 py-2 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                >Dashboard
+                                </Link>
+                                <div>
+                                <svg onClick={handleCartClick} className="w-7 h-7 p-1 rounded group cursor-pointer" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path className="group-hover:stroke-blue-700" d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
                         ) : (
                             <>
                                 <Link
@@ -96,6 +107,9 @@ const WebLayout = ({children}) => {
                 </div>
             </nav>
             {children}
+            <FormModal show={openCart} onClose={handleCartClick}>
+                <Cart/>
+            </FormModal>
         </div>
     )
 }
