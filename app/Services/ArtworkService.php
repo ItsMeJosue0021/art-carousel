@@ -32,7 +32,7 @@ class ArtworkService
                   ->orWhere('description', 'like', '%' . $searchTerm . '%');
         }
 
-        $artworks = $query->latest()->paginate(12);
+        $artworks = $query->latest()->paginate(10);
 
         return $artworks;
     }
@@ -40,14 +40,14 @@ class ArtworkService
     public function getForApprovalArtworks() {
         $artworks = Artwork::where('product_status_id', 2)
                         ->latest()
-                        ->paginate(12);
+                        ->paginate(10);
         return $artworks;
     }
 
     public function getSoldOutArtworks() {
         $artworks = Artwork::where('product_status_id', 3)
                         ->latest()
-                        ->paginate(12);
+                        ->paginate(10);
         return $artworks;
     }
 
@@ -55,7 +55,7 @@ class ArtworkService
         $artworks = Artwork::where('user_id', $userId)
                         ->where('product_status_id', 1)
                         ->latest()
-                        ->paginate(12);
+                        ->paginate(10);
         return $artworks;
     }
 
@@ -63,7 +63,7 @@ class ArtworkService
         $artworks = Artwork::where('user_id', $userId)
                         ->where('product_status_id', 2)
                         ->latest()
-                        ->paginate(12);
+                        ->paginate(10);
         return $artworks;
     }
 
@@ -71,7 +71,7 @@ class ArtworkService
         $artworks = Artwork::where('user_id', $userId)
                         ->where('product_status_id', 3)
                         ->latest()
-                        ->paginate(12);
+                        ->paginate(10);
         return $artworks;
     }
 

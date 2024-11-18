@@ -35,7 +35,7 @@ const Artworks = () => {
         <UserLayout>
             <Head title="Artworks" />
             <div className="flex flex-col gap-5 p-5">
-                <ArtworkPageHeader switchTab={switchTab} activeTab={activeTab} openAddMaterialModal={openAddArtworModal}/>
+                <ArtworkPageHeader switchTab={switchTab} activeTab={activeTab} openAddMaterialModal={openAddArtworModal} role={'user'}/>
                 <div>
                     {activeTab === 'forSale' && (
                         <div className="flex flex-col gap-1">

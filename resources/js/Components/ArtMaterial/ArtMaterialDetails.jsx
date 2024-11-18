@@ -4,7 +4,7 @@ import { BASE_URL } from "@/config";
 const ArtMaterialDetails = ({material}) => {
     return (
         <div className="w-auto min-w-[1000px] max-w-[1200px] text-sm p-8 pt-0 flex items-start gap-5">
-            <div class="w-full mx-auto flex flex-wrap">
+            <div class="w-full mx-auto flex items-center flex-wrap">
                 {material.image ? (
                     <img src={`${BASE_URL}/${material.image}`} alt="Selected Image" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" />
                 ) : (

@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
         Route::get('/dashboard', 'dashboard')->name('user.dashboard');
         Route::get('/artworks', 'artworks')->name('user.artworks');
         Route::get('/materials', 'materials')->name('user.materials');
+        Route::get('/orders', 'orders')->name('user.orders');
     });
 });
 
@@ -44,6 +45,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
         Route::get('/dashboard', 'dashboard')->name('admin.dashboard');
         Route::get('/artworks', 'artworks')->name('admin.artworks');
         Route::get('/materials', 'materials')->name('admin.materials');
+        Route::get('/orders', 'orders')->name('admin.orders');
+        Route::get('/artists', 'artists')->name('admin.artists');
     });
 });
 

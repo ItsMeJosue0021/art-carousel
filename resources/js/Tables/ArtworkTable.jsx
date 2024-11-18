@@ -21,6 +21,14 @@ const ArtworkTable = ({artworks, isLoading, handleSelectedArtwork, onDeleteSucce
         }
     }
 
+    const truncateTextByWords = (text, limit) => {
+        const words = text.split(' ');
+        if (words.length > limit) {
+          return words.slice(0, limit).join(' ') + '...';
+        }
+        return text;
+    };
+
     if (isLoading) {
         return (
             <div className="w-full min-h-96 flex items-center justify-center">
@@ -88,7 +96,7 @@ const ArtworkTable = ({artworks, isLoading, handleSelectedArtwork, onDeleteSucce
                                 {artwork.name}
                             </th>
                             <td className="px-6 py-4">
-                                {artwork.description}
+                                {truncateTextByWords(artwork.description, 10)}
                             </td>
                             <td className="px-6 py-4">
                                 {artwork.categoryName}

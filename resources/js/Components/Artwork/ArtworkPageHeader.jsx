@@ -30,7 +30,7 @@ const ArtworkPageHeader = ({switchTab, activeTab, openAddMaterialModal, role}) =
                 </li>
             </ul>
 
-            {role === 'user' ?? (
+            {role === 'user' && (
                 <div>
                     <button onClick={openAddMaterialModal} className="text-sm text-white bg-blue-800 hover:bg-blue-900 px-4 py-2 rounded">Add</button>
                 </div>

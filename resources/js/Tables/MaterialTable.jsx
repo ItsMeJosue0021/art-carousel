@@ -18,6 +18,14 @@ const MaterialTable = ({materials, isLoading, handleSelectedMaterial, onDeleteSu
         });
     }
 
+    const truncateTextByWords = (text, limit) => {
+        const words = text.split(' ');
+        if (words.length > limit) {
+          return words.slice(0, limit).join(' ') + '...';
+        }
+        return text;
+    };
+
 
     if (isLoading) {
         return (
@@ -89,7 +97,7 @@ const MaterialTable = ({materials, isLoading, handleSelectedMaterial, onDeleteSu
                                 {material.name}
                             </th>
                             <td className="px-6 py-4">
-                                {material.description}
+                                {truncateTextByWords(material.description, 10)}
                             </td>
                             <td className="px-6 py-4">
                                 {material.categoryName}

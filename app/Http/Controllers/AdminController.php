@@ -20,5 +20,13 @@ class AdminController extends Controller
         return Inertia::render('Admin/Materials');
     }
 
+    public function orders() {
+        return Inertia::render('Admin/Orders');
+    }
+
+    public function artists() {
+        return Inertia::render('Admin/Artists');
+    }
+
 
 }

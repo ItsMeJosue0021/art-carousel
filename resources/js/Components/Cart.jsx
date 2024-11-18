@@ -2,7 +2,7 @@ import React from "react";
 
 const Cart = () => {
     return (
-        <section className="bg-white p-8 antialiased dark:bg-gray-900 rounded-lg ">
+        <section className="bg-white px-8 antialiased dark:bg-gray-900 rounded-lg ">
             <div className="rounded-lg">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Your Cart</h2>
 

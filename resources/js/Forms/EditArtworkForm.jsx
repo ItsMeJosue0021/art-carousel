@@ -81,7 +81,7 @@ const EditArtworkForm = ({artwork, onEditSuccess}) => {
 
 
     return (
-        <div className="w-auto min-w-[1000px] text-sm p-6 flex items-start gap-5">
+        <div className="w-auto min-w-[1000px] text-sm p-6 pt-0 flex items-start gap-5">
             <div className="w-full flex flex-col gap-5">
                 <div className="flex flex-col space-y-1">
                     <p>Name</p>
@@ -91,7 +91,7 @@ const EditArtworkForm = ({artwork, onEditSuccess}) => {
 
                 <div className="flex flex-col space-y-1">
                     <p>Dsescription</p>
-                    <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Dsescription.." className="h-26 px-4 py-2 text-sm border border-gray-300 rounded"></textarea>
+                    <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Dsescription.." className="h-32 px-4 py-2 text-sm border border-gray-300 rounded"></textarea>
                     {errors.description && <span className="text-xs text-red-500">{errors.description[0]}</span>}
                 </div>
 

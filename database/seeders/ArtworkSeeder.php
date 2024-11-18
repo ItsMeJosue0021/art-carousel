@@ -14,29 +14,110 @@ class ArtworkSeeder extends Seeder
     public function run(): void
     {
         Artwork::create([
-            'name' => 'Abstract Sunrise',
-            'description' => 'A beautiful abstract painting of a sunrise.',
-            'price' => 250.00,
+            'name' => 'Eternal Bloom',
+            'description' => 'A vibrant explosion of florals, Eternal Bloom captures the everlasting beauty of nature in full bloom. Each petal is meticulously detailed, reflecting the artists dedication to capturing lifes fleeting moments.',
+            'price' => 2500.00,
             'artwork_category_id' => 1,
-            'product_status_id' => 1,
+            'product_status_id' => 2,
             'user_id' => 2
         ]);
 
         Artwork::create([
-            'name' => 'Modern Landscape',
-            'description' => 'A modern take on landscape art.',
-            'price' => 300.00,
+            'name' => 'Luminous Horizon',
+            'description' => 'This captivating seascape portrays the first light of dawn breaking over a tranquil ocean. The interplay of light and shadow creates a luminous horizon that evokes feelings of peace and hope.',
+            'price' => 3000.00,
             'artwork_category_id' => 2,
-            'product_status_id' => 1,
+            'product_status_id' => 2,
             'user_id' => 2
         ]);
 
         Artwork::create([
-            'name' => 'Classic Portrait',
-            'description' => 'An elegant portrait in classic style.',
-            'price' => 150.00,
+            'name' => 'Whispers of the Past',
+            'description' => 'A nostalgic journey through time, Whispers of the Past features a collage of vintage objects and memories. The muted color palette and intricate details invite viewers to reflect on their own histories.',
+            'price' => 1500.00,
             'artwork_category_id' => 3,
-            'product_status_id' => 1,
+            'product_status_id' => 2,
+            'user_id' => 2
+        ]);
+
+        Artwork::create([
+            'name' => 'Urban Pulse',
+            'description' => 'The heartbeat of the city is captured in Urban Pulse, where dynamic lines and bold colors depict the energy and chaos of urban life. Its a celebration of the vibrant spirit that defines metropolitan landscapes.',
+            'price' => 2500.00,
+            'artwork_category_id' => 1,
+            'product_status_id' => 2,
+            'user_id' => 2
+        ]);
+
+        Artwork::create([
+            'name' => 'Mystic Forest',
+            'description' => 'This captivating seascape portrays the first light of dawn breaking over a tranquil ocean. The interplay of light and shadow creates a luminous horizon that evokes feelings of peace and hope.',
+            'price' => 3000.00,
+            'artwork_category_id' => 2,
+            'product_status_id' => 2,
+            'user_id' => 2
+        ]);
+
+        Artwork::create([
+            'name' => 'Celestial Dreams',
+            'description' => 'A nostalgic journey through time, Whispers of the Past features a collage of vintage objects and memories. The muted color palette and intricate details invite viewers to reflect on their own histories.',
+            'price' => 1500.00,
+            'artwork_category_id' => 3,
+            'product_status_id' => 2,
+            'user_id' => 2
+        ]);
+
+        Artwork::create([
+            'name' => 'Harmony in Chaos',
+            'description' => 'The heartbeat of the city is captured in Urban Pulse, where dynamic lines and bold colors depict the energy and chaos of urban life. Its a celebration of the vibrant spirit that defines metropolitan landscapes.',
+            'price' => 2500.00,
+            'artwork_category_id' => 1,
+            'product_status_id' => 2,
+            'user_id' => 2
+        ]);
+
+        Artwork::create([
+            'name' => 'Golden Reverie',
+            'description' => 'This captivating seascape portrays the first light of dawn breaking over a tranquil ocean. The interplay of light and shadow creates a luminous horizon that evokes feelings of peace and hope.',
+            'price' => 3000.00,
+            'artwork_category_id' => 2,
+            'product_status_id' => 2,
+            'user_id' => 2
+        ]);
+
+        Artwork::create([
+            'name' => 'Echoes of Time',
+            'description' => 'A nostalgic journey through time, Whispers of the Past features a collage of vintage objects and memories. The muted color palette and intricate details invite viewers to reflect on their own histories.',
+            'price' => 1500.00,
+            'artwork_category_id' => 3,
+            'product_status_id' => 2,
+            'user_id' => 2
+        ]);
+
+        Artwork::create([
+            'name' => 'Vibrant Mirage',
+            'description' => 'The heartbeat of the city is captured in Urban Pulse, where dynamic lines and bold colors depict the energy and chaos of urban life. Its a celebration of the vibrant spirit that defines metropolitan landscapes.',
+            'price' => 2500.00,
+            'artwork_category_id' => 1,
+            'product_status_id' => 2,
+            'user_id' => 2
+        ]);
+
+        Artwork::create([
+            'name' => 'Desert Oasis',
+            'description' => 'This captivating seascape portrays the first light of dawn breaking over a tranquil ocean. The interplay of light and shadow creates a luminous horizon that evokes feelings of peace and hope.',
+            'price' => 3000.00,
+            'artwork_category_id' => 2,
+            'product_status_id' => 2,
+            'user_id' => 2
+        ]);
+
+        Artwork::create([
+            'name' => 'Silent Symphony',
+            'description' => 'A nostalgic journey through time, Whispers of the Past features a collage of vintage objects and memories. The muted color palette and intricate details invite viewers to reflect on their own histories.',
+            'price' => 1500.00,
+            'artwork_category_id' => 3,
+            'product_status_id' => 2,
             'user_id' => 2
         ]);
     }

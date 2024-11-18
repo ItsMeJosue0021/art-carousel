@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import api from '@/api';
 import FormModal from "@/Components/FormModal";
 import Cart from "@/Components/Cart";
+import GenericModal from "@/Components/GenericModal";
 
 const WebLayout = ({children}) => {
 
@@ -107,9 +108,9 @@ const WebLayout = ({children}) => {
                 </div>
             </nav>
             {children}
-            <FormModal show={openCart} onClose={handleCartClick}>
+            <GenericModal show={openCart} onClose={handleCartClick}>
                 <Cart/>
-            </FormModal>
+            </GenericModal>
         </div>
     )
 }
